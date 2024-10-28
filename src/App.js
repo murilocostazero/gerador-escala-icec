@@ -36,13 +36,18 @@ function App() {
     return sundays;
   };
 
+  const formatDate = (date) => {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    return date.toLocaleDateString('pt-BR', options); // 'pt-BR' para o formato dd/mm/aaaa
+  };
+
   // Gera a escala de duplas para cada domingo do mês
   const generateSchedule = () => {
     if (!month || !year) return;
 
     const sundays = getSundays(parseInt(month), parseInt(year));
     const newSchedule = sundays.map((sunday, index) => ({
-      date: sunday.toLocaleDateString(),
+      date: sunday.toLocaleDateString('pt-BR'),
       projection: duo[(index + selectedDuo) % duo.length].projection,
       social: duo[(index + selectedDuo) % duo.length].social
     }));
